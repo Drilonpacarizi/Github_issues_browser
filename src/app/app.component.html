@@ -1,0 +1,47 @@
+<div class="container">
+  <nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Angular repository search in Github</a>
+  </nav>
+
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search for..."
+      [(ngModel)]="searchText"
+    />
+  </div>
+</div>
+
+<div
+  class="card"
+  *ngFor="let item of issues | filter: searchText; let i = index"
+>
+  <div class="card-body">
+    <h5 class="card-title">{{ item.node.title }}</h5>
+    <p class="card-text">
+      #{{ item.node.number }} {{ item.node.state }} {{ item.node.updatedAt }}
+    </p>
+    <a href="#popup" class="btn btn-primary" (click)="detailsBtn(i)"
+      >See Details</a
+    >
+  </div>
+</div>
+<div *ngIf="propsBool" class="popup" id="popup">
+  <div class="popup__content">
+    <div class="popup__right">
+      <a href="#section-tours" class="popup__close">&times;</a>
+      <h2 class="heading-secondary u-margin-bottom-small">
+        {{ title }}
+      </h2>
+      <h3 class="heading-tertiary u-margin-bottom-small"></h3>
+      <p class="popup__text">
+        {{ body }}
+      </p>
+      <label>Comments</label>
+      <div class="mt-2" *ngFor="let item of comments">
+        {{ item.body }}
+      </div>
+    </div>
+  </div>
+</div>
